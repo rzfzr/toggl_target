@@ -62,11 +62,11 @@ class TogglAPI(object):
         excluding any RUNNING real time tracked time entries
         """
         time_entries = self.get_time_entries(start_date=start_date.isoformat(), end_date=end_date.isoformat())
-
+        print(time_entries)
         if time_entries is None:
             return 0
 
-        total_seconds_tracked = sum(max(entry['duration'], 0) for entry in time_entries)
+        total_seconds_tracked = sum(max(entry['duration'], 0) for entry in filter( lambda x : x['pid'] == 158321738 ,time_entries))
 
         return (total_seconds_tracked / 60.0) / 60.0
 
